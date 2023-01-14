@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ public class AppOrderTest {
 
     @BeforeAll
     static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
     }
 
     @AfterEach
@@ -30,10 +31,10 @@ public class AppOrderTest {
 
     @Test
     void Test () {
-        driver.get("http://localhost:7777 ");
-        driver.findElement(By.cssSelector("[type='text']")).sendKeys("иванов иван");
-        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("+79179179172");
-        driver.findElement(By.cssSelector("[type='checkbox']")).click();
+        driver.get("http://localhost:7777");
+        driver.findElement(By.cssSelector("[data-test-id= 'name'] input")).sendKeys("иванов иван");
+        driver.findElement(By.cssSelector("[data-test-id= 'phone'] input")).sendKeys("+79179179172");
+        driver.findElement(By.cssSelector("[data-test-id = 'agreement']")).click();
         driver.findElement(By.cssSelector("[type='button']")).click();
         String actualMessage = driver.findElement(By.cssSelector(".Success_successBlock__2L3Cw")).getText();
         String expectedMessage = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
