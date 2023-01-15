@@ -1,2 +1,2 @@
 # Project status badge
-![image](https://user-images.githubusercontent.com/109061196/212556911-2345a6ca-7c50-4988-8176-4ae575bd7818.png)
+[![Build status](https://ci.appveyor.com/api/projects/status/ghuvmt7kwqhanyq6/branch/main?svg=true)](https://ci.appveyor.com/project/zilyabayram/autojava-3/branch/main)
