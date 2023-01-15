@@ -14,11 +14,6 @@ public class AppOrderTest {
         WebDriverManager.chromedriver().setup();
     }
 
-    @AfterEach
-    void tearDown () {
-        driver.quit();
-        driver = null;
-    }
 
     @BeforeEach
     void createBrowser () {
@@ -30,16 +25,22 @@ public class AppOrderTest {
     }
 
     @Test
-    void Test () {
+    void shouldTestElements () {
         driver.get("http://localhost:7777");
         driver.findElement(By.cssSelector("[data-test-id= 'name'] input")).sendKeys("иванов иван");
         driver.findElement(By.cssSelector("[data-test-id= 'phone'] input")).sendKeys("+79179179172");
         driver.findElement(By.cssSelector("[data-test-id = 'agreement']")).click();
         driver.findElement(By.cssSelector("[type='button']")).click();
-        String actualMessage = driver.findElement(By.cssSelector(".Success_successBlock__2L3Cw")).getText();
+        String actualMessage = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText();
         String expectedMessage = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         Assertions.assertEquals(expectedMessage, actualMessage.strip());
 
+    }
+
+    @AfterEach
+    void tearDown () {
+        driver.quit();
+        driver = null;
     }
 
 }
